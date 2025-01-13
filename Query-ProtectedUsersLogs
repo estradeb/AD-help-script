@@ -5,8 +5,9 @@
 #>
 
 
-#Get domain controlers AD objects
-$dcList = Get-ADComputer -SearchBase "OU=Domain Controllers,DC=domain,DC=local" -filter *
+$domain = Get-ADDomain
+$dcList = Get-ADComputer -SearchBase $domain.DomainControllersContainer -filter *
+
 
 $EventID = @()
 $EventID += [pscustomobject]@{ ID = "104" ; "Logname"= "Microsoft-Windows-Authentication/ProtectedUser-Client"}
